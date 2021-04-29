@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(8, 8, 68);
+}
+.container{
+    margin-top: 16px;
+}
+.card{
+    margin-bottom: 16px;
+}
