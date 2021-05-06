@@ -39,7 +39,54 @@
         </div>
       </nav>
 
-    <div id="pai">
+
+    <div class="container contanier-body-funcionario">
+        <form th:action="@{/funcionario/save}"
+              th:object="${funcionario}"
+              method="post">
+
+            <div th:if="${erro}" class="alert alert-danger">
+                <span th:text="${erroMsg}"></span>
+            </div>
+
+    <div class="form-floating">
+        <input type="number" class="form-control" id="floatingInputId"
+               placeholder="Código" disabled th:field="*{id}">
+        <label for="floatingInputId">Código</label>
+    </div>
+
+    <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome"
+        th:field="*{nome}" required>
+        <label for="floatingInputNome">Nome</label>
+    </div>
+    <div class="form-floating ">
+        <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
+        th:field="*{email}" required>
+        <label for="floatingInputEmail">Email address</label>
+    </div>
+    <div class="form-floating">
+         <input type="text" class="form-control" id="floatingInputZap" placeholder="WhatsApp"
+         th:field="*{zap}" required>
+         <label for="floatingInputZap">WhatsApp</label>
+    </div>
+
+            <div class="row">
+                <div class="col">
+                    <a th:href="@{/funcionario/list}" class="btn btn-outline-secondary btn-form" href="#">Voltar
+                    <i class="fa fa-backspace"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-success btn-form" type="submit">
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+                </div>
+            </div>
+    </form>
+    </div>
+
+    <!--<div id="pai">
         <div id="form">
             <div id="headpai">
                 <div id="head">
@@ -61,7 +108,7 @@
             </div>
 
         </div>
-    </div>
+    </div>-->
 
 <!--JS-->
 

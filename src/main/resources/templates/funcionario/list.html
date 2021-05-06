@@ -40,7 +40,11 @@
 </nav>
 
 <header>
-    <div id="table-pai">
+    <div id="table">
+        <div id="novo">
+            <a th:href="@{/funcionario/add}">Novo</a>
+        </div>   
+
         <table>
             <thead>
                 <tr >
@@ -58,16 +62,14 @@
                     <td th:text="${funcionario.email}"></td>
                     <td th:text="${funcionario.zap}"></td>
                     <td>
-                        <a th:href="@{/funcionario/edit}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
+                        <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
                         <a th:href="@{/funcionario/delete}" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div id="novo">
-            <a th:href="@{/funcionario/add}">Novo</a>
-        </div>
-    </div>    
+    </div>
+        
 </header>
 
 
