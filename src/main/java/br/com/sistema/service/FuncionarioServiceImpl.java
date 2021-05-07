@@ -70,5 +70,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         }
         return error;
     }
+
+    public boolean deleteById(Long id){
+        try{
+            funcionarioRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
 

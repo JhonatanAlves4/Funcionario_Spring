@@ -63,12 +63,30 @@
                     <td th:text="${funcionario.zap}"></td>
                     <td>
                         <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
-                        <a th:href="@{/funcionario/delete}" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
+                        <a th:onclick="|showModalDeletar('funcionario', ${funcionario.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <div class="modal" tabindex="-1" id="modalDeletar">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header modal-header-color">
+              <h5 class="modal-title">Aviso !</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Voce deseja deletar mesmo o funcionario? kkkk.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="deletar()">Deletar</button>
+            </div>
+          </div>
+        </div>
+      </div>
         
 </header>
 
@@ -82,5 +100,6 @@
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 
 <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/javascript/script.js}"></script>
 </body>
 </html>

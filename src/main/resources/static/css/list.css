@@ -44,6 +44,7 @@ ion-icon {
     width: 30px;
     height: 30px;
     padding: 0 10px;
+    cursor: pointer;
 }
 #edit {
     color: rgb(100, 100, 100);
@@ -60,4 +61,9 @@ ion-icon {
 }
 a .id {
     color: transparent;
+}
+
+.modal-header-color{
+    background-color: rgb(6, 31, 49);
+    color: #fff;
 }
