@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 @Entity(name = "funcionario")
 public class Funcionario {
 
+    //atributos
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +24,7 @@ public class Funcionario {
     @NotNull
     private String zap;
 
+    //getters and setters
     public Long getId() {
         return id;
     }

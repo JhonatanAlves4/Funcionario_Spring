@@ -29,7 +29,7 @@
                     <a class="nav-link" href="#">Funcionários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cargo/list">Cargo</a>
+                    <a class="nav-link active" href="/cargo/list">Cargo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Membros</a>
@@ -53,20 +53,16 @@
                 <tr >
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Opções</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="funcionario : ${funcionarios}">
-                    <td th:text="${funcionario.id}"></td>
-                    <td th:text="${funcionario.nome}"></td>
-                    <td th:text="${funcionario.email}"></td>
-                    <td th:text="${funcionario.zap}"></td>
+                <tr th:each="cargo : ${cargos}">
+                    <td th:text="${cargo.id}"></td>
+                    <td th:text="${cargo.nome}"></td>
                     <td>
-                        <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
-                        <a th:onclick="|showModalDeletar('funcionario', ${funcionario.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
+                        <a th:href="@{'/cargo/edit/' + ${cargo.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
+                        <a th:onclick="|showModalDeletar('cargo', ${cargo.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>
                     </td>
                 </tr>
             </tbody>
@@ -81,7 +77,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Voce deseja deletar mesmo o funcionario? kkkk.</p>
+              <p>Voce deseja deletar mesmo o cargo? agr to sério.</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
