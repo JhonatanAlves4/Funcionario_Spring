@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
+    <title>edit</title>
 
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
-    <link rel="stylesheet" th:href="@{/css/list.css}">
-   
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
 </head>
 <body>
 
@@ -29,7 +29,7 @@
                     <a class="nav-link" href="/funcionario/list">Funcionários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/cargo/list">Cargo</a>
+                    <a class="nav-link" href="/cargo/list">Cargo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Membros</a>
@@ -42,53 +42,67 @@
     </div>
 </nav>
 
-<header>
-    <div id="table">
-        <div id="novo">
-            <a th:href="@{/cargo/add}">Novo</a>
-        </div>   
 
-        <table>
-            <thead>
-                <tr >
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="cargo : ${cargos}">
-                    <td th:text="${cargo.id}"></td>
-                    <td th:text="${cargo.nome}"></td>
-                    <td>
-                        <a th:href="@{'/cargo/edit/' + ${cargo.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
-                        <a th:onclick="|showModalDeletar('cargo', ${cargo.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container contanier-body-funcionario">
+    <form th:action="@{/cargo/save}"
+          th:object="${cargo}"
+          method="post">
 
-    <div class="modal" tabindex="-1" id="modalDeletar">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header modal-header-color">
-              <h5 class="modal-title">Aviso !</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Voce deseja deletar mesmo o cargo? agr to sério.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="deletar()">Deletar</button>
-            </div>
-          </div>
+        <div th:if="${erro}" class="alert alert-danger">
+            <span th:text="${erroMsg}"></span>
         </div>
-      </div>
-        
-</header>
 
+        <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInputId"
+                   placeholder="Código" th:field="${cargo.id}" readonly>
+            <label for="floatingInputId">Código</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome"
+                   th:field="${cargo.nome}" required>
+            <label for="floatingInputNome">Nome</label>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <a th:href="@{/cargo/list}" class="btn btn-outline-secondary btn-form" href="#">Voltar
+                    <i class="fa fa-backspace"></i>
+                </a>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-success btn-form" type="submit">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--<div id="pai">
+    <div id="form">
+        <div id="headpai">
+            <div id="head">
+                <h2>Funcionário</h2>
+            </div>
+        </div>
+
+        <div class="inputpai">
+            Código
+            <input type="text">
+        </div>
+        <div class="inputpai">
+            Nome
+            <input type="text">
+        </div>
+        <div class="inputpai">
+            Cargo
+            <input type="text">
+        </div>
+
+    </div>
+</div>-->
 
 <!--JS-->
 
@@ -96,9 +110,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
         crossorigin="anonymous"></script>
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-
 <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
-<script th:src="@{/javascript/script.js}"></script>
 </body>
 </html>

@@ -8,7 +8,8 @@ public interface CargoService {
     public Cargo findById(Long id);
     public Cargo findByNome(String nome);
     public List<Cargo> findAll();
+    public String validarCargo(Cargo cargo);
 
-    public String save(Cargo cargo);
-    public String deleteById();
+    public boolean save(Cargo cargo);
+    public boolean deleteById(Long id);
 }
