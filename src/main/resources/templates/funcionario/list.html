@@ -55,6 +55,7 @@
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Telefone</th>
+                    <th>Cargo</th>
                     <th>Opções</th>
                 </tr>
             </thead>
@@ -64,6 +65,7 @@
                     <td th:text="${funcionario.nome}"></td>
                     <td th:text="${funcionario.email}"></td>
                     <td th:text="${funcionario.zap}"></td>
+                    <td th:text="${funcionario.cargo}"></td>
                     <td>
                         <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
                         <a th:onclick="|showModalDeletar('funcionario', ${funcionario.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          

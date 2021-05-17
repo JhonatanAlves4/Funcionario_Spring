@@ -54,7 +54,7 @@
 
         <div class="form-floating">
             <input type="number" class="form-control" id="floatingInputId"
-                   placeholder="Código" disabled th:field="${funcionario.id}" readonly>
+                   placeholder="Código" th:field="${funcionario.id}" readonly>
             <label for="floatingInputId">Código</label>
         </div>
 
@@ -72,6 +72,17 @@
             <input type="text" class="form-control" id="floatingInputZap" placeholder="WhatsApp"
                    th:field="${funcionario.zap}" required>
             <label for="floatingInputZap">WhatsApp</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect" required
+                    aria-label="Selecione um cargo"
+                    th:field="${funcionario.cargo.id}">
+                <option th:each="c : ${cargos}"
+                        th:value="${c.id}"
+                        th:text="${c}">One</option>
+            </select>
+            <label for="floatingSelect">Selecione um cargo</label>
         </div>
 
         <div class="row">

@@ -1,6 +1,7 @@
 package br.com.sistema.controller;
 
 import br.com.sistema.model.Funcionario;
+import br.com.sistema.service.CargoServiceImpl;
 import br.com.sistema.service.FuncionarioService;
 import br.com.sistema.service.FuncionarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class FuncionarioController {
     @Autowired
     FuncionarioServiceImpl funcionarioService;
 
+    @Autowired
+    CargoServiceImpl cargoService;
+
     @GetMapping("/funcionario/list")
     public String list(Model model) {
         model.addAttribute("funcionarios", funcionarioService.findAll());
@@ -26,6 +30,7 @@ public class FuncionarioController {
     @GetMapping("/funcionario/add")
     public String add(Model model) {
         model.addAttribute("funcionario", new Funcionario());
+        model.addAttribute("cargos", cargoService.findAll());
         return "funcionario/add";
     }
 
@@ -33,38 +38,43 @@ public class FuncionarioController {
     public String save(Funcionario funcionario, Model model) {
 
         String msgErro = funcionarioService.validarFuncionario(funcionario);
-        if(msgErro != null) {
-            model.addAttribute("funcionario",funcionario);
-            model.addAttribute("erro", true);
-            model.addAttribute("erroMsg", msgErro);
-
-            if (funcionario.getId() == null) return "funcionario/add";
-            return "funcionario/edit";
-        }
-
-        if (funcionarioService.save(funcionario)){
-            return "redirect:/funcionario/list";
-        }else {
+        if (msgErro != null) {
             model.addAttribute("funcionario", funcionario);
-            return "redirect:/funcionario/add";
+            model.addAttribute("erro", true);
+            model.addAttribute("erroMsg", "O email já existe");
+
+            if (funcionario.getId() == null) {
+                return "funcionario/add";
+            } else {
+                return "funcionario/edit";
+            }
         }
+            if (funcionarioService.save(funcionario)) {
+                return "redirect:/funcionario/list";
+            } else {
+                model.addAttribute("funcionario", funcionario);
+                return "redirect:/funcionario/add";
+            }
+
     }
 
     @GetMapping("/funcionario/edit/{id}")
-    public String edit(@PathVariable Long id, Model model){
+    public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("funcionario", funcionarioService.findById(id));
+        model.addAttribute("cargos", cargoService.findAll());
         return "funcionario/edit";
     }
 
     @GetMapping("/funcionario/delete/{id}")
-    public String delete(@PathVariable long id){
+    public String delete(@PathVariable long id) {
 
-        if (funcionarioService.deleteById(id)){
+        if (funcionarioService.deleteById(id)) {
             return "redirect:/funcionario/list";
-        }else {
+        } else {
             //TODO: os alunos blabl bla mensgaem bnita de ero
             //model.addAttribute("funcionario", funcionario);
             return "funcionario/list";
         }
     }
 }
+

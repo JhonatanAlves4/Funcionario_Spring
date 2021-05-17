@@ -74,6 +74,17 @@
          <label for="floatingInputZap">WhatsApp</label>
     </div>
 
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect" required
+                    aria-label="Selecione um cargo"
+                    th:field="*{cargo.id}">
+                <option th:each="c : ${cargos}"
+                        th:value="${c.id}"
+                        th:text="${c}">One</option>
+            </select>
+            <label for="floatingSelect">Selecione um cargo</label>
+        </div>
+
             <div class="row">
                 <div class="col">
                     <a th:href="@{/funcionario/list}" class="btn btn-outline-secondary btn-form" href="#">Voltar

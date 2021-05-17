@@ -24,6 +24,10 @@ public class Funcionario {
     @NotNull
     private String zap;
 
+    @OneToOne
+    @JoinColumn(name = "cargo_id", referencedColumnName = "id")
+    private Cargo cargo;
+
     //getters and setters
     public Long getId() {
         return id;
@@ -55,6 +59,14 @@ public class Funcionario {
 
     public void setZap(String zap) {
         this.zap = zap;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     @Override
