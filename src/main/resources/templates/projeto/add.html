@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit</title>
+    <title>Add</title>
 
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
@@ -44,8 +44,8 @@
 
 
 <div class="container contanier-body-funcionario">
-    <form th:action="@{/funcionario/save}"
-          th:object="${funcionario}"
+    <form th:action="@{/projeto/save}"
+          th:object="${projeto}"
           method="post">
 
         <div th:if="${erro}" class="alert alert-danger">
@@ -54,40 +54,62 @@
 
         <div class="form-floating">
             <input type="number" class="form-control" id="floatingInputId"
-                   placeholder="Código" th:field="${funcionario.id}" readonly>
+                   placeholder="Código" disabled th:field="*{id}">
             <label for="floatingInputId">Código</label>
         </div>
 
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome"
-                   th:field="${funcionario.nome}" required>
+                   th:field="*{nome}" required>
             <label for="floatingInputNome">Nome</label>
         </div>
         <div class="form-floating ">
-            <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
-                   th:field="${funcionario.email}" required>
-            <label for="floatingInputEmail">Email address</label>
+            <input type="text" class="form-control" id="floatingInputEmail" placeholder="Descrição"
+                   th:field="*{descricao}" required>
+            <label for="floatingInputEmail">Descrição</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputZap" placeholder="WhatsApp"
-                   th:field="${funcionario.zap}" required>
-            <label for="floatingInputZap">WhatsApp</label>
+            <input type="text" class="form-control" id="floatingInputStatus" placeholder="Status"
+                   th:field="*{status}" required>
+            <label for="floatingInputStatus">Status</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputRisco" placeholder="Risco"
+                   th:field="*{risco}" required>
+            <label for="floatingInputRisco">Risco</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputOrc" placeholder="Orçamento"
+                   th:field="*{orcamento}" required>
+            <label for="floatingInputOrc">Orçamento</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputDataInicial" placeholder="Data Inicial"
+                   th:field="*{dataInicial}" required>
+            <label for="floatingInputDataInicial">Data Inicial</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputDataFinal" placeholder="Data Final"
+                   th:field="*{dataFinal}" required>
+            <label for="floatingInputDataFinal">Data Final</label>
         </div>
 
+        <!--
         <div class="form-floating mb-3">
             <select class="form-select" id="floatingSelect" required
                     aria-label="Selecione um cargo"
-                    th:field="${funcionario.cargo.id}">
+                    th:field="*{cargo.id}">
                 <option th:each="c : ${cargos}"
                         th:value="${c.id}"
                         th:text="${c}">One</option>
             </select>
             <label for="floatingSelect">Selecione um cargo</label>
         </div>
+        -->
 
         <div class="row">
             <div class="col">
-                <a th:href="@{/funcionario/list}" class="btn btn-outline-secondary btn-form" href="#">Voltar
+                <a th:href="@{/projeto/list}" class="btn btn-outline-secondary btn-form">Voltar
                     <i class="fa fa-backspace"></i>
                 </a>
             </div>
@@ -99,6 +121,7 @@
         </div>
     </form>
 </div>
+
 
 <!--JS-->
 

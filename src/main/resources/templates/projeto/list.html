@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
+    <title>List Projeto</title>
 
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
-    <link rel="stylesheet" th:href="@{/css/listcargo.css}">
-   
+    <link rel="stylesheet" th:href="@{/css/listprojeto.css}">
+
 </head>
 <body>
+
+<!--  NAV  -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -23,16 +25,16 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link " aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/funcionario/list">Funcionários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/cargo/list">Cargos</a>
+                    <a class="nav-link" href="/cargo/list">Cargos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/projeto/list">Projetos</a>
+                    <a class="nav-link active" href="#">Projetos</a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -42,53 +44,71 @@
     </div>
 </nav>
 
-<header>
+<!-- HEADER -->
+
+
+
+<div id="container">
     <div id="table">
         <div id="novo-pai">
-            <div id="novo">
-                <a id="novo" th:href="@{/cargo/add}">Novo</a>
-            </div>   
+            <div id="novoo">
+                <a id="novo" th:href="@{/projeto/add}">Novo</a>
+            </div>
         </div>
+
         <table>
             <thead>
-                <tr >
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Opções</th>
-                </tr>
+            <tr >
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Status</th>
+                <th>Risco</th>
+                <th>Orçamento</th>
+                <th>Dt. início</th>
+                <th>Dt. final</th>
+                <th>Opções</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="cargo : ${cargos}">
-                    <td th:text="${cargo.id}"></td>
-                    <td th:text="${cargo.nome}"></td>
-                    <td>
-                        <a th:href="@{'/cargo/edit/' + ${cargo.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
-                        <a th:onclick="|showModalDeletar('cargo', ${cargo.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>
-                    </td>
-                </tr>
+            <tr th:each="projeto : ${projetos}">
+                <td th:text="${projeto.id}"></td>
+                <td th:text="${projeto.nome}"></td>
+                <td th:text="${projeto.descricao}"></td>
+                <td th:text="${projeto.status}"></td>
+                <td th:text="${projeto.risco}"></td>
+                <td th:text="${projeto.orcamento}"></td>
+                <td th:text="${projeto.dataInicial}"></td>
+                <td th:text="${projeto.dataFinal}"></td>
+                <td>
+                    <a th:href="@{'/projeto/edit/' + ${projeto.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
+                    <a th:onclick="|showModalDeletar('projeto', ${projeto.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
+</div>
 
-    <div class="modal" tabindex="-1" id="modalDeletar">
-        <div class="modal-dialog">
-          <div class="modal-content">
+<div class="modal" tabindex="-1" id="modalDeletar">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header modal-header-color">
-              <h5 class="modal-title">Aviso !</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Aviso !</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Voce deseja deletar mesmo o cargo? agr to sério.</p>
+                <p>Voce deseja deletar mesmo o projeto? kkkk.</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="deletar()">Deletar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="deletar()">Deletar</button>
             </div>
-          </div>
         </div>
-      </div>
-        
-</header>
+    </div>
+</div>
+
+
 
 
 <!--JS-->

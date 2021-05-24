@@ -9,10 +9,12 @@
     <!--CSS-->
     <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
-    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/listfuncionario.css}">
    
 </head>
 <body>
+
+<!--  NAV  -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -23,16 +25,16 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link " aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Funcionários</a>
+                    <a class="nav-link active" href="#">Funcionários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cargo/list">Cargo</a>
+                    <a class="nav-link" href="/cargo/list">Cargos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Membros</a>
+                    <a class="nav-link" href="/projeto/list">Projetos</a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -42,37 +44,44 @@
     </div>
 </nav>
 
-<header>
-    <div id="table">
-        <div id="novo">
-            <a th:href="@{/funcionario/add}">Novo</a>
-        </div>   
+<!-- HEADER -->
 
-        <table>
-            <thead>
-                <tr >
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Cargo</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="funcionario : ${funcionarios}">
-                    <td th:text="${funcionario.id}"></td>
-                    <td th:text="${funcionario.nome}"></td>
-                    <td th:text="${funcionario.email}"></td>
-                    <td th:text="${funcionario.zap}"></td>
-                    <td th:text="${funcionario.cargo}"></td>
-                    <td>
-                        <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
-                        <a th:onclick="|showModalDeletar('funcionario', ${funcionario.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+    
+    <div id="container">
+        <div id="table">
+            <div id="novo-pai">
+                <div id="novo">
+                    <a id="novo" th:href="@{/funcionario/add}">Novo</a>
+                </div>
+            </div>   
+
+            <table>
+                <thead>
+                    <tr >
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cargo</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="funcionario : ${funcionarios}">
+                        <td th:text="${funcionario.id}"></td>
+                        <td th:text="${funcionario.nome}"></td>
+                        <td th:text="${funcionario.email}"></td>
+                        <td th:text="${funcionario.zap}"></td>
+                        <td th:text="${funcionario.cargo}"></td>
+                        <td>
+                            <a th:href="@{'/funcionario/edit/' + ${funcionario.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
+                            <a th:onclick="|showModalDeletar('funcionario', ${funcionario.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="modal" tabindex="-1" id="modalDeletar">
@@ -93,7 +102,7 @@
         </div>
       </div>
         
-</header>
+
 
 
 <!--JS-->
