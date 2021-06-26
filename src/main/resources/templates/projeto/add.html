@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/funcionario/list">Funcionários</a>
@@ -32,7 +32,7 @@
                     <a class="nav-link" href="/cargo/list">Cargos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/projeto/list">Projetos</a>
+                    <a class="nav-link active" href="/projeto/list">Projetos</a>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -54,7 +54,7 @@
 
         <div class="form-floating">
             <input type="number" class="form-control" id="floatingInputId"
-                   placeholder="Código" disabled th:field="*{id}">
+                   placeholder="Código" readonly th:field="${projeto.id}">
             <label for="floatingInputId">Código</label>
         </div>
 
@@ -64,14 +64,9 @@
             <label for="floatingInputNome">Nome</label>
         </div>
         <div class="form-floating ">
-            <input type="text" class="form-control" id="floatingInputEmail" placeholder="Descrição"
+            <input type="text" class="form-control" id="floatingInputDescricao" placeholder="Descrição"
                    th:field="*{descricao}" required>
-            <label for="floatingInputEmail">Descrição</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputStatus" placeholder="Status"
-                   th:field="*{status}" required>
-            <label for="floatingInputStatus">Status</label>
+            <label for="floatingInputDescricao">Descrição</label>
         </div>
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInputRisco" placeholder="Risco"
@@ -79,33 +74,59 @@
             <label for="floatingInputRisco">Risco</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputOrc" placeholder="Orçamento"
+            <input type="number" class="form-control" id="floatingInputOrc" placeholder="Orçamento"
                    th:field="*{orcamento}" required>
             <label for="floatingInputOrc">Orçamento</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputDataInicial" placeholder="Data Inicial"
+            <input type="date" class="form-control" id="floatingInputDataInicial" placeholder="Data Inicial"
                    th:field="*{dataInicial}" required>
             <label for="floatingInputDataInicial">Data Inicial</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInputDataFinal" placeholder="Data Final"
+            <input type="date" class="form-control" id="floatingInputDataFinal" placeholder="Data Final"
                    th:field="*{dataFinal}" required>
             <label for="floatingInputDataFinal">Data Final</label>
         </div>
 
-        <!--
+
         <div class="form-floating mb-3">
-            <select class="form-select" id="floatingSelect" required
-                    aria-label="Selecione um cargo"
-                    th:field="*{cargo.id}">
-                <option th:each="c : ${cargos}"
-                        th:value="${c.id}"
-                        th:text="${c}">One</option>
+            <select class="form-select" id="floatingSelect2"
+                    aria-label="Selecione um status"
+                    th:field="*{status}"  required>
+                <option value="Iniciado">Iniciado</option>
+                <option value="Planejado">Planejado</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Concluido">Concluído</option>
             </select>
-            <label for="floatingSelect">Selecione um cargo</label>
+            <label for="floatingSelect2">Selecione um status</label>
         </div>
-        -->
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect"
+                    aria-label="Selecione o gerente"
+                    th:field="*{gerente.id}"  required>
+                <option th:each="g : ${gerentes}"
+                        th:value="${g.id}"
+                        th:text="${g.nome}">
+                </option>
+            </select>
+            <label for="floatingSelect">Selecione um gerente</label>
+        </div>
+
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelectFuncionarios"
+                    aria-label="Selecione um funcionário"
+                    th:field="*{funcionarios}"  multiple size="10">
+                <option th:each="pf : ${funcionarios}"
+                        th:value="${pf.id}"
+                        th:text="${pf.nome}">
+                </option>
+            </select>
+            <label for="floatingSelectFuncionarios">Selecione um funcionário</label>
+        </div>
 
         <div class="row">
             <div class="col">

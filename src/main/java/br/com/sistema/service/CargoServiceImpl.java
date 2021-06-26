@@ -50,6 +50,12 @@ public class CargoServiceImpl implements CargoService{
         return error;
     }
 
+    //quarto
+    @Override
+    public List<Cargo> findByNomeNot(String nome) {
+        return cargoRepository.findByNomeNot(nome);
+    }
+
     @Override
     public boolean save(Cargo cargo) {
         try{

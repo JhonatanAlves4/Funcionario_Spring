@@ -10,6 +10,8 @@
     <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
     <link rel="stylesheet" th:href="@{/css/listprojeto.css}">
+    <link rel="stylesheet" th:href="@{/css/listprojetoResp.css}" media="screen and (max-width: 1000px)">
+
 
 </head>
 <body>
@@ -67,6 +69,7 @@
                 <th>Orçamento</th>
                 <th>Dt. início</th>
                 <th>Dt. final</th>
+                <th>Gerente</th>
                 <th>Opções</th>
             </tr>
             </thead>
@@ -77,9 +80,10 @@
                 <td th:text="${projeto.descricao}"></td>
                 <td th:text="${projeto.status}"></td>
                 <td th:text="${projeto.risco}"></td>
-                <td th:text="${projeto.orcamento}"></td>
-                <td th:text="${projeto.dataInicial}"></td>
-                <td th:text="${projeto.dataFinal}"></td>
+                <td th:text="${'R$ '+ #numbers.formatDecimal(projeto.orcamento, 1, 'DEFAULT', 2,'DEFAULT')}"></td>
+                <td th:text="${#dates.format(projeto.dataInicial, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(projeto.dataFinal, 'dd/MM/yyyy')}"></td>
+                <td th:text="${projeto.gerente.nome}"></td>
                 <td>
                     <a th:href="@{'/projeto/edit/' + ${projeto.id}}" class="id"> <ion-icon name="create" id="edit"></ion-icon> </a>
                     <a th:onclick="|showModalDeletar('projeto', ${projeto.id})|" class="id"> <ion-icon name="trash-outline" id="delete"></ion-icon> </a>

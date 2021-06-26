@@ -25,7 +25,7 @@ div#table {
     width: 90%;
     margin-top: 10px;
 }
-#novoo {
+#novo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@ div#table {
     border-radius: 5px;
     background-color: rgb(12, 104, 224);
     transition: .2s;
-}
+} 
 #novo:hover {
     background-color: rgb(6, 31, 49);
 }

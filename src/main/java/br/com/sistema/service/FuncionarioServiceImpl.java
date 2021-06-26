@@ -1,5 +1,6 @@
 package br.com.sistema.service;
 
+import br.com.sistema.model.Cargo;
 import br.com.sistema.model.Funcionario;
 import br.com.sistema.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,17 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         }
         return error;
     }
+
+    @Override
+    public List<Funcionario> findByCargo(Cargo cargo) {
+        return funcionarioRepository.findByCargo(cargo);
+    }
+
+    @Override
+    public List<Funcionario> findByCargoIn(List<Cargo> cargos) {
+        return funcionarioRepository.findByCargoIn(cargos);
+    }
+
 
     public boolean deleteById(Long id){
         try{

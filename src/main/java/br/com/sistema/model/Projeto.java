@@ -1,12 +1,10 @@
 package br.com.sistema.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 
 @Entity(name = "projeto")
 public class Projeto {
@@ -40,6 +38,17 @@ public class Projeto {
 
     @NotNull
     private Date dataFinal;
+
+    @OneToOne
+    @JoinColumn(name = "gerente_id", referencedColumnName = "id")
+    private Funcionario gerente;
+
+    @ManyToMany
+    @JoinTable(name = "projeto_funcionario",
+            joinColumns = @JoinColumn(name = "projeto_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+    )
+    private List<Funcionario> funcionarios;
 
     //getter and setter
     public Long getId() {
@@ -104,6 +113,23 @@ public class Projeto {
 
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    public Funcionario getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(Funcionario gerente) {
+        this.gerente = gerente;
+    }
+
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     @Override

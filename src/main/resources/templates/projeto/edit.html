@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/fontawesome-5.15.3/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Sistema Funcionário</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/funcionario/list">Funcionários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cargo/list">Cargos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/projeto/list">Projetos</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+              Um grande sistema bom
+            </span>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container contanier-body-funcionario">
+    <form th:action="@{/projeto/save}"
+          th:object="${projeto}"
+          method="post">
+
+        <div th:if="${erro}" class="alert alert-danger">
+            <span th:text="${erroMsg}"></span>
+        </div>
+
+        <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInputId"
+                   placeholder="Código" readonly th:field="${projeto.id}">
+            <label for="floatingInputId">Código</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputNome" placeholder="Nome"
+                   th:field="*{nome}" required>
+            <label for="floatingInputNome">Nome</label>
+        </div>
+        <div class="form-floating ">
+            <input type="text" class="form-control" id="floatingInputDescricao" placeholder="Descrição"
+                   th:field="*{descricao}" required>
+            <label for="floatingInputDescricao">Descrição</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputRisco" placeholder="Risco"
+                   th:field="*{risco}" required>
+            <label for="floatingInputRisco">Risco</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInputOrc" placeholder="Orçamento"
+                   th:field="*{orcamento}" required>
+            <label for="floatingInputOrc">Orçamento</label>
+        </div>
+        <div class="form-floating">
+            <input type="date" class="form-control" id="floatingInputDataInicial" placeholder="Data Inicial"
+                   th:field="*{dataInicial}" required>
+            <label for="floatingInputDataInicial">Data Inicial</label>
+        </div>
+        <div class="form-floating">
+            <input type="date" class="form-control" id="floatingInputDataFinal" placeholder="Data Final"
+                   th:field="*{dataFinal}" required>
+            <label for="floatingInputDataFinal">Data Final</label>
+        </div>
+
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect2"
+                    aria-label="Selecione um status"
+                    th:field="*{status}"  required>
+                <option value="Iniciado">Iniciado</option>
+                <option value="Planejado">Planejado</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Concluido">Concluído</option>
+            </select>
+            <label for="floatingSelect2">Selecione um status</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect"
+                    aria-label="Selecione o gerente"
+                    th:field="${projeto.gerente.id}"  required>
+                <option th:each="g : ${gerentes}"
+                        th:value="${g.id}"
+                        th:text="${g.nome}">
+                </option>
+            </select>
+            <label for="floatingSelect">Selecione um gerente</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelectFuncionarios"
+                    aria-label="Selecione um funcionário"
+                    th:field="${projeto.funcionarios}"  multiple size="10">
+                <option th:each="pf : ${funcionarios}"
+                        th:value="${pf.id}"
+                        th:text="${pf.nome}">
+                </option>
+            </select>
+            <label for="floatingSelectFuncionarios">Selecione um funcionário</label>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <a th:href="@{/projeto/list}" class="btn btn-outline-secondary btn-form">Voltar
+                    <i class="fa fa-backspace"></i>
+                </a>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-success btn-form" type="submit">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!--JS-->
+
+<script th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
+<script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
